@@ -1,66 +1,228 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HIGH</title>
+    <title>HIGH | أعمال وتطبيقات ويفر</title>
     <style>
+        :root {
+            --bg-dark: #050505;
+            --main-purple: #9d00ff;
+            --neon-blue: #00f2ff;
+            --highlight-yellow: #ffdf00;
+            --text-white: #ffffff;
+            --card-bg: #111111;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: white;
             margin: 0;
             padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
         }
+
+        /* تنسيق الاسم الرئيسي HIGH */
         header {
-            background-color: purple;
-            padding: 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, rgba(157, 0, 255, 0.1) 0%, rgba(0, 0, 0, 1) 80%);
+        }
+
+        .main-logo {
+            font-size: 8rem;
+            font-weight: 900;
+            color: var(--main-purple);
+            text-shadow: 0 0 20px var(--main-purple), 0 0 40px var(--neon-blue);
+            letter-spacing: 15px;
+            margin: 0;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px var(--main-purple); }
+            to { text-shadow: 0 0 40px var(--neon-blue), 0 0 10px var(--main-purple); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            margin-top: -10px;
+        }
+
+        /* قسم الأعمال والبطاقات الصفراء */
+        .section {
+            padding: 80px 5%;
+        }
+
+        .section-title {
             text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--main-purple);
+            border-bottom: 2px solid var(--neon-blue);
+            display: inline-block;
+            width: 100%;
         }
-        h1 {
-            color: neon; /* This is a placeholder for neon colors */
+
+        .works-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
-        .projects, .partners, .contact {
-            padding: 20px;
-            margin: 20px;
-            border-radius: 10px;
-            background-color: yellow;
+
+        .work-card {
+            background: var(--card-bg);
+            border: 2px solid var(--highlight-yellow);
+            padding: 25px;
+            border-radius: 15px;
+            position: relative;
+            transition: 0.4s;
+            box-shadow: 0 5px 15px rgba(255, 223, 0, 0.1);
         }
-        .card {
-            margin: 10px;
-            padding: 10px;
-            background-color: neon blue;
-            border-radius: 8px;
-            color: black;
+
+        .work-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 25px rgba(255, 223, 0, 0.3);
         }
-        .btn {
-            background-color: neon blue;
-            color: white;
-            padding: 10px 20px;
+
+        .work-card h3 {
+            color: var(--highlight-yellow);
+            font-size: 1.8rem;
+            margin-top: 0;
+        }
+
+        .download-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
             text-decoration: none;
             border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
         }
+
+        .download-btn:hover {
+            background: var(--neon-blue);
+            color: black;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        /* قسم الشركاء والإحصائيات */
+        .partners-section {
+            background: #0a0a0a;
+            padding: 60px 5%;
+        }
+
+        .stats-panel {
+            display: none; /* مخفي افتراضياً */
+            background: #1a1a1a;
+            padding: 20px;
+            margin-top: 15px;
+            border-left: 4px solid var(--neon-blue);
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .info-btn {
+            background: var(--main-purple);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        /* التواصل الاجتماعي */
+        footer {
+            padding: 60px 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-links a {
+            color: var(--neon-blue);
+            margin: 0 15px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--main-purple);
+        }
+
     </style>
 </head>
 <body>
+
     <header>
-        <h1>HIGH</h1>
+        <h1 class="main-logo">HIGH</h1>
+        <p class="subtitle">أعمال وتطبيقات ويفر</p>
     </header>
-    <section class="projects">
-        <h2>Projects and Applications</h2>
-        <div class="card">
-            <h3>SETVOID System</h3>
-            <p>This is a brief description of the SETVOID system.</p>
-            <a href="#" class="btn">Download</a>
+
+    <section class="section">
+        <h2 class="section-title">قائمة الأعمال</h2>
+        <div class="works-container">
+            <div class="work-card">
+                <h3>SETVOID</h3>
+                <p>نظام فريد لتطوير الذات مستوحى من ميكانيكيات "سولو ليفلينج". حوّل حياتك إلى مهمة لرفع مستواك وامتلاك القوة المطلقة.</p>
+                <a href="#" class="download-btn">تحميل الآن</a>
+            </div>
+
+            <div class="work-card">
+                <h3>تطبيق الويفر الذكي</h3>
+                <p>حلول برمجية متطورة لإدارة المهام اليومية بكفاءة عالية وتصميم عصري.</p>
+                <a href="#" class="download-btn">استكشاف</a>
+            </div>
         </div>
     </section>
-    <section class="partners">
-        <h2>Partners</h2>
-        <p>Showing statistics and information about our partners.</p>
+
+    <section class="partners-section">
+        <h2 class="section-title">شركاء النجاح</h2>
+        <div class="works-container">
+            <div class="work-card" style="border-color: var(--main-purple);">
+                <h3 style="color: var(--main-purple);">شركة التقنية الدولية</h3>
+                <p>شريك استراتيجي في تطوير بنية SETVOID التحتية.</p>
+                <button class="info-btn" onclick="toggleStats('stats1')">معلومات الإحصائيات</button>
+                <div id="stats1" class="stats-panel">
+                    <p>النتائج: نمو بنسبة 40%</p>
+                    <p>النوع: شراكة تقنية</p>
+                    <p>المستخدمين النشطين: 10,000+</p>
+                </div>
+            </div>
+        </div>
     </section>
-    <section class="contact">
-        <h2>Contact & Social Media</h2>
-        <p>Get in touch with us through our social media.</p>
-    </section>
+
+    <footer>
+        <h2>تواصل معنا</h2>
+        <div class="social-links">
+            <a href="#">Discord</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+            <a href="#">Email</a>
+        </div>
+        <p style="margin-top: 40px; color: #444;">&copy; 2026 HIGH - جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script>
+        function toggleStats(id) {
+            var panel = document.getElementById(id);
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        }
+    </script>
+
 </body>
 </html>
