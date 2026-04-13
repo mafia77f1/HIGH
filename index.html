@@ -16,111 +16,185 @@
         }
 
         html, body {
-            margin: 0; padding: 0; width: 100%; overflow-x: hidden;
-            background: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Cairo', sans-serif;
             scroll-behavior: smooth;
         }
 
         header {
-            padding: 50px 0; text-align: center;
+            padding: 50px 0;
+            text-align: center;
             border-bottom: 2px solid var(--p-glow);
             background: radial-gradient(circle at center, #1a0033 0%, #020202 100%);
             box-shadow: 0 10px 30px rgba(188, 19, 254, 0.2);
         }
 
         .high-logo {
-            font-size: 3.5rem; font-weight: 900; color: #fff;
-            text-transform: uppercase; letter-spacing: 12px;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 12px;
             text-shadow: 0 0 15px var(--p-glow), 0 0 30px var(--p-glow), 0 0 50px var(--p-dark);
         }
 
         .container { padding: 30px 5%; }
-        .section-title { color: var(--y-neon); text-align: center; margin: 40px 0 20px 0; text-shadow: 0 0 10px rgba(255, 240, 31, 0.5); }
+        .section-title { color: var(--y-neon); text-align: center; margin-bottom: 35px; text-shadow: 0 0 10px rgba(255, 240, 31, 0.5); }
 
         /* قصة WAVER */
-        .story-container {
+        .story-box {
             background: rgba(188, 19, 254, 0.05);
-            border: 1px solid var(--p-glow);
-            padding: 25px; border-radius: 20px; margin-bottom: 40px;
-            line-height: 1.8; position: relative; overflow: hidden;
-        }
-        .story-container::after {
-            content: "WAVER STORY"; position: absolute; bottom: -10px; left: -10px;
-            font-size: 4rem; opacity: 0.03; font-weight: 900;
+            border-right: 5px solid var(--p-glow);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            line-height: 1.8;
+            font-style: italic;
         }
 
-        /* نظام الأهداف */
+        /* شريط التقدم */
         .goal-card {
-            background: #0a0a0a; border: 1px solid #333;
-            padding: 20px; border-radius: 15px; margin-bottom: 15px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
         }
-        .goal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .goal-title { color: var(--n-blue); font-weight: bold; }
         .progress-container {
-            width: 100%; height: 12px; background: #222; border-radius: 10px;
-            overflow: hidden; margin: 10px 0;
+            width: 100%;
+            background: #111;
+            border-radius: 10px;
+            height: 12px;
+            margin: 10px 0;
+            overflow: hidden;
+            border: 1px solid #222;
         }
         .progress-bar {
-            height: 100%; background: linear-gradient(90deg, var(--n-blue), var(--p-glow));
-            box-shadow: 0 0 10px var(--n-blue); transition: width 1s ease;
+            height: 100%;
+            background: linear-gradient(90deg, var(--n-blue), var(--p-glow));
+            box-shadow: 0 0 10px var(--n-blue);
+            transition: width 1s ease-in-out;
         }
 
-        /* التصميم العام للبطاقات */
-        .grid { display: flex; flex-direction: column; align-items: center; gap: 25px; }
+        .grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
         .card {
             background: linear-gradient(145deg, #0f0f0f, #050505);
-            border: 2px solid var(--y-neon); border-radius: 20px;
-            padding: 25px; width: 88%; max-width: 380px;
+            border: 2px solid var(--y-neon);
+            border-radius: 20px;
+            padding: 25px;
+            width: 88%;
+            max-width: 380px;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5); cursor: pointer; position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 0 15px rgba(255, 240, 31, 0.05);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
-        .card:hover { transform: translateY(-12px) scale(1.03); border-color: var(--n-blue); box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3); }
 
-        /* النوافذ */
-        .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.96); z-index: 2000; overflow-y: auto;
-            opacity: 0; transition: opacity 0.4s ease; backdrop-filter: blur(12px);
+        .card:hover {
+            transform: translateY(-12px) scale(1.03);
+            border-color: var(--n-blue);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
         }
+
+        /* الاقتراحات */
+        .suggestion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .suggest-card {
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid;
+            background: #0f0f0f;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.96);
+            z-index: 2000;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            backdrop-filter: blur(12px);
+        }
+
         .modal.show { display: block; opacity: 1; }
+
         .modal-content {
-            background: #0d001a; margin: 5% auto; width: 90%; max-width: 550px;
-            border: 2px solid var(--p-glow); border-radius: 25px; padding: 25px;
-            box-shadow: 0 0 60px var(--p-dark); transform: scale(0.7);
+            background: #0d001a;
+            margin: 8% auto;
+            width: 88%;
+            max-width: 550px;
+            border: 2px solid var(--p-glow);
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 0 60px var(--p-dark);
+            transform: scale(0.7);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
         .modal.show .modal-content { transform: scale(1); }
-        .close-btn { color: var(--p-glow); font-size: 2.5rem; cursor: pointer; float: left; }
 
-        /* مدخلات الشراكة والتواصل */
-        .input-group { margin-bottom: 15px; text-align: right; }
-        .input-group label { display: block; color: var(--p-glow); margin-bottom: 5px; font-size: 0.9rem; }
-        input, textarea {
-            width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333;
-            color: white; border-radius: 10px; font-family: 'Cairo'; outline: none;
-        }
-        input:focus { border-color: var(--n-blue); }
+        .close-btn { color: var(--p-glow); font-size: 2.5rem; cursor: pointer; float: left; margin-top: -10px; }
 
-        /* قسم الاقتراحات */
-        .suggestion-box {
-            background: #080808; border: 1px dashed var(--p-glow);
-            padding: 15px; border-radius: 15px; margin-top: 15px;
+        .warning-box {
+            background: rgba(255, 0, 60, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-align: center;
         }
-        .suggest-item {
-            border-bottom: 1px solid #222; padding: 10px 0; font-size: 0.9rem;
-        }
-        .suggest-user { color: var(--y-neon); font-weight: bold; }
 
         .dl-btn {
             display: block; width: 100%; text-align: center; padding: 18px 0;
             margin-top: 20px; background: transparent; border: 2px solid var(--n-blue);
-            color: var(--n-blue); font-weight: 900; border-radius: 10px; cursor: pointer;
-            transition: 0.3s; text-transform: uppercase;
+            color: var(--n-blue); text-decoration: none; font-weight: 900;
+            border-radius: 10px; cursor: pointer; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 1px;
         }
+
         .dl-btn:hover { background: var(--n-blue); color: #000; box-shadow: 0 0 25px var(--n-blue); }
 
+        .news-container {
+            margin-top: 15px;
+            max-height: 180px;
+            overflow-y: auto;
+            padding: 12px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+        }
+
+        .news-item { border-right: 4px solid var(--p-glow); padding: 8px 12px; margin-bottom: 12px; font-size: 0.95rem; background: rgba(255,255,255,0.03); }
+
+        .stats-area { background: linear-gradient(to top, #000, #050505); padding: 60px 5%; text-align: center; }
+        
         footer { padding: 50px; text-align: center; border-top: 1px solid rgba(188, 19, 254, 0.2); }
-        .social-links a { color: var(--p-glow); margin: 0 10px; text-decoration: none; font-size: 1.2rem; }
+        .social a { color: var(--p-glow); margin: 0 15px; text-decoration: none; font-weight: bold; }
+        
+        input, textarea {
+            width: 100%; background: #111; border: 1px solid var(--p-glow); 
+            color: white; padding: 10px; margin: 10px 0; border-radius: 8px;
+        }
     </style>
 </head>
 <body>
@@ -130,34 +204,20 @@
         <p style="color: var(--p-glow); opacity: 0.8; letter-spacing: 2px;">System Core Architecture</p>
     </header>
 
+    <section class="container">
+        <h2 class="section-title">أصل النظام: قصة WAVER</h2>
+        <div class="story-box">
+            "بدأ كل شيء في ظلام الغرفة، حيث كانت الأكواد تتراقص أمام عيني ويفر (Waver). لم تكن الرغبة في بناء تطبيق مجرد فكرة برمجية، بل كانت صرخة ضد العشوائية. عانيت من التشتت، من ضياع الأهداف، ومن نظام حياة لا يرتقي لمستوى الطموح. من وسط تلك المعاناة، ولدت فكرة SETVOID.. النظام الذي لا يرحم الكسل، النظام الذي يحول حياتك إلى واجهة RPG حقيقية. كانت البداية متواضعة، لكن الرؤية كانت دائماً الوصول للقمة."
+        </div>
+    </section>
+
+    <section class="container" id="goals-section">
+        <h2 class="section-title">أهداف مؤسسة HIGH</h2>
+        <div id="goals-list">
+            </div>
+    </section>
+
     <div class="container">
-        
-        <h2 class="section-title">نشأة WAVER: من المعاناة إلى القوة</h2>
-        <div class="story-container">
-            <p>بدأ WAVER كحلم في غرفة مظلمة، وُلد من رحم المعاناة والبحث عن "النظام" المفقود. في عام 2024، كنت أصارع التشتت وضعف الإرادة، ومن هنا بدأت كتابة أول أسطر الكود. لم يكن الأمر سهلاً؛ واجهت مئات الأخطاء البرمجية (Bugs) ولحظات يأس كدت أتخلى فيها عن كل شيء. لكن في كل مرة كنت أسقط، كان "النظام" يخبرني أن أستيقظ (Wake Up). WAVER ليس مجرد تطبيق، بل هو تجسيد لرحلتي في تحويل الضعف البشري إلى جبروت تقني.</p>
-        </div>
-
-        <h2 class="section-title">أهداف شركة HIGH</h2>
-        <div id="goalsList">
-            <div class="goal-card">
-                <div class="goal-header">
-                    <span class="goal-title">تطوير محرك SETVOID الكامل</span>
-                    <span style="color: var(--y-neon);">85%</span>
-                </div>
-                <div class="progress-container"><div class="progress-bar" style="width: 85%;"></div></div>
-                <p style="font-size: 0.8rem; color: #ccc;">الوصف: إتمام البرمجة الأساسية لنظام تطوير الذات وربطه بقواعد البيانات السحابية.</p>
-            </div>
-
-            <div class="goal-card">
-                <div class="goal-header">
-                    <span class="goal-title">توسيع مجتمع الـ High Ranks</span>
-                    <span style="color: var(--y-neon);">40%</span>
-                </div>
-                <div class="progress-container"><div class="progress-bar" style="width: 40%;"></div></div>
-                <p style="font-size: 0.8rem; color: #ccc;">الوصف: الوصول لـ 10,000 مستخدم نشط يستخدمون النظام يومياً لتطوير حياتهم.</p>
-            </div>
-        </div>
-
         <h2 class="section-title">الأعمال والتطبيقات</h2>
         <div class="grid">
             <div class="card" onclick="openModal('setvoidModal')">
@@ -170,22 +230,16 @@
     </div>
 
     <section class="container">
-        <h2 class="section-title">ارتباط مع WAVER</h2>
-        <div class="grid">
-            <div class="card" style="border-color: var(--p-dark);" onclick="openModal('waverContactModal')">
-                <h3>تحدث مع ويفر</h3>
-                <p>إرسال رسالة مباشرة أو تقديم اقتراح للنظام.</p>
-            </div>
+        <h2 class="section-title">التواصل مع WAVER</h2>
+        <div class="card" style="margin: auto; border-color: var(--n-blue);" onclick="openModal('contactModal')">
+            <h3>أرسل رسالة مباشرة</h3>
+            <p>تواصل مع المطور الرئيسي، قدم اقتراحك أو استفسارك.</p>
         </div>
     </section>
 
     <section class="container">
-        <h2 class="section-title">أفضل الاقتراحات 💎</h2>
-        <div class="suggestion-box" id="bestSuggestions">
-            <div class="suggest-item">
-                <span class="suggest-user">علي أحمد:</span> إضافة نظام مبارزة بين المستخدمين.
-                <div style="font-size: 0.7rem; color: #666;">التاريخ: 2026-04-10 | <span style="color: var(--n-blue);">شكراً لك!</span></div>
-            </div>
+        <h2 class="section-title">أفضل الاقتراحات</h2>
+        <div class="suggestion-grid" id="suggestions-list">
             </div>
     </section>
 
@@ -198,64 +252,17 @@
         </div>
     </section>
 
-    <div id="partnerModal" class="modal">
+    <div id="contactModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('partnerModal')">&times;</span>
-            <h2 style="color: var(--p-glow);">طلب شراكة تقني</h2>
-            
-            <div class="input-group">
-                <label>اسم التطبيق / المشروع:</label>
-                <input type="text" id="partnerApp" placeholder="أدخل الاسم هنا...">
-            </div>
-            
-            <div class="input-group">
-                <label>رابط Instagram:</label>
-                <input type="text" id="partnerInsta" placeholder="https://instagram.com/...">
-            </div>
-
-            <div class="input-group">
-                <label>رابط Discord:</label>
-                <input type="text" id="partnerDiscord" placeholder="Discord Tag or Link">
-            </div>
-
-            <div class="input-group">
-                <label>مواقع تواصل أخرى:</label>
-                <input type="text" id="partnerOther" placeholder="X, TikTok, GitHub...">
-            </div>
-
-            <div class="input-group">
-                <label>سبب الشراكة المقترح:</label>
-                <textarea id="partnerReason" rows="3"></textarea>
-            </div>
-
-            <div style="background: rgba(255,0,0,0.1); padding:10px; color:var(--danger); font-size: 0.8rem; border-radius:10px; margin-bottom:15px;">
-                ⚠️ تنبيه: سيتم رفض أي طلب غير مكتمل أو للمزاح فقط.
-            </div>
-
-            <button class="dl-btn" onclick="handlePartnerRequest()">إرسال الطلب الرسمي</button>
-        </div>
-    </div>
-
-    <div id="waverContactModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('waverContactModal')">&times;</span>
-            <h2 style="color: var(--n-blue);">تواصل مباشر</h2>
-            
-            <div class="input-group">
-                <label>اسمك:</label>
-                <input type="text" id="senderName">
-            </div>
-
-            <div class="input-group">
-                <label>اقتراحك أو رسالتك:</label>
-                <textarea id="senderMsg" rows="4"></textarea>
-            </div>
-
-            <button class="dl-btn" onclick="handleContactMsg()">إرسال الرسالة</button>
-            
-            <div class="social-links" style="margin-top:20px; text-align:center;">
-                <p style="font-size: 0.8rem; color: #888;">روابطي الرسمية:</p>
-                <a href="#">INSTAGRAM</a> | <a href="#">DISCORD</a> | <a href="#">X-PROJECT</a>
+            <span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
+            <h2 style="color: var(--n-blue);">تواصل مع المطور</h2>
+            <input type="text" id="userName" placeholder="اسمك">
+            <textarea id="userMsg" rows="4" placeholder="رسالتك أو اقتراحك"></textarea>
+            <button class="dl-btn" onclick="sendMessage()">إرسال الرسالة</button>
+            <div style="margin-top: 20px; text-align: center;">
+                <a href="#" style="color: var(--p-glow);">Discord</a> | 
+                <a href="#" style="color: var(--n-blue);">Telegram</a> | 
+                <a href="#" style="color: var(--y-neon);">Instagram</a>
             </div>
         </div>
     </div>
@@ -263,43 +270,101 @@
     <div id="setvoidModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('setvoidModal')">&times;</span>
-            <h2 style="color: var(--p-glow);">نظام SETVOID</h2>
+            <h2 style="color: var(--p-glow); text-shadow: 0 0 10px var(--p-glow);">نظام SETVOID</h2>
+            <p style="font-size: 0.85rem; color: #aaa;">النسخة: V1.0.4 [REAWAKENED]</p>
+            <div class="news-container">
+                <div class="news-item">تفعيل بروتوكول "الطلب المسبق" للرتب العليا.</div>
+                <div class="news-item">تحسين واجهة المستخدم.</div>
+            </div>
             <button class="dl-btn" onclick="handlePreOrder()">الطلب المسبق الآن</button>
         </div>
     </div>
 
+    <div id="partnerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('partnerModal')">&times;</span>
+            <h2 style="color: var(--p-glow);">اتفاقية الشراكة</h2>
+            <input type="text" id="appName" placeholder="اسم التطبيق الخاص بك">
+            <input type="text" id="socialLinks" placeholder="روابط مواقع التواصل (Discord, X, etc.)">
+            <div class="warning-box">
+                ⚠️ تحذير: سيتم حظر العابثين نهائياً.
+            </div>
+            <button class="dl-btn" style="border-color: var(--p-glow); color: var(--p-glow);" onclick="handlePartnerRequest()">تقديم رسمي</button>
+        </div>
+    </div>
+
     <footer>
-        <p>© 2026 HIGH SYSTEM INTERFACE. CREATED BY WAVER.</p>
+        <div class="social">
+            <a href="#">DISCORD</a> | <a href="#">INSTAGRAM</a> | <a href="#">X-PROJECT</a>
+        </div>
+        <p style="margin-top:30px; opacity:0.4; font-size: 0.8rem;">© 2026 HIGH SYSTEM INTERFACE. NO ADMITTANCE FOR LOW RANKS.</p>
     </footer>
 
     <script>
         let dCount = 0;
         let pCount = 0;
 
+        // --- قسم إدارة الأهداف (سهل التعديل) ---
+        const goals = [
+            { title: "إطلاق SETVOID", desc: "إصدار النسخة التجريبية الأولى للمستخدمين.", progress: 75 },
+            { title: "توسيع الشبكة", desc: "ربط 10 تطبيقات بنظام HIGH الأساسي.", progress: 40 },
+            { title: "نظام الذكاء الاصطناعي", desc: "دمج معالج "ويفر" الذكي داخل النظام.", progress: 15 }
+        ];
+
+        function renderGoals() {
+            const container = document.getElementById('goals-list');
+            container.innerHTML = goals.map(g => `
+                <div class="goal-card">
+                    <h4 style="color: var(--n-blue); margin: 0;">${g.title}</h4>
+                    <p style="font-size: 0.9rem; color: #ccc; margin: 5px 0;">${g.desc}</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: ${g.progress}%"></div>
+                    </div>
+                    <small style="color: var(--p-glow)">نسبة الإنجاز: ${g.progress}%</small>
+                </div>
+            `).join('');
+        }
+
+        // --- قسم إدارة الاقتراحات (سهل التعديل) ---
+        const suggestions = [
+            { name: "أحمد", text: "إضافة نظام مهام يومية تنافسية.", date: "2026/04/10", color: "var(--p-glow)" },
+            { name: "سارة", text: "توفير نسخة داكنة بالكامل للواجهة.", date: "2026/04/12", color: "var(--n-blue)" },
+            { name: "ياسين", text: "ربط التطبيق بالساعات الذكية.", date: "2026/04/13", color: "var(--y-neon)" }
+        ];
+
+        function renderSuggestions() {
+            const container = document.getElementById('suggestions-list');
+            container.innerHTML = suggestions.map(s => `
+                <div class="suggest-card" style="border-left-color: ${s.color}">
+                    <h5 style="color: ${s.color}; margin: 0;">${s.name}</h5>
+                    <p style="font-size: 0.9rem; margin: 10px 0;">${s.text}</p>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; opacity: 0.6;">
+                        <span>${s.date}</span>
+                        <span>شكراً لثقتك!</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
         function handlePreOrder() {
             dCount++;
             document.getElementById('demandCount').innerText = dCount;
-            const body = "أرغب في الطلب المسبق لـ SETVOID:\n\n- الاسم:\n- العمر:\n- اليوم:\n- نوع الجهاز:\n- سبب الطلب:";
-            window.location.href = `mailto:momnsuper2010@gmail.com?subject=SETVOID PRE-ORDER&body=${encodeURIComponent(body)}`;
+            window.location.href = `mailto:momnsuper2010@gmail.com?subject=SETVOID PRE-ORDER`;
         }
 
         function handlePartnerRequest() {
+            const app = document.getElementById('appName').value;
+            const links = document.getElementById('socialLinks').value;
             pCount++;
             document.getElementById('partnerCount').innerText = pCount;
-            const app = document.getElementById('partnerApp').value;
-            const insta = document.getElementById('partnerInsta').value;
-            const disc = document.getElementById('partnerDiscord').value;
-            const other = document.getElementById('partnerOther').value;
-            const reason = document.getElementById('partnerReason').value;
-
-            const body = `طلب شراكة جديد:\n- التطبيق: ${app}\n- انستقرام: ${insta}\n- ديسكورد: ${disc}\n- تواصل آخر: ${other}\n- السبب: ${reason}`;
-            window.location.href = `mailto:momnsuper2010@gmail.com?subject=PARTNERSHIP REQUEST&body=${encodeURIComponent(body)}`;
+            const body = `طلب شراكة:\nالتطبيق: ${app}\nالمواقع: ${links}`;
+            window.location.href = `mailto:momnsuper2010@gmail.com?subject=PARTNERSHIP&body=${encodeURIComponent(body)}`;
         }
 
-        function handleContactMsg() {
-            const name = document.getElementById('senderName').value;
-            const msg = document.getElementById('senderMsg').value;
-            window.location.href = `mailto:momnsuper2010@gmail.com?subject=MESSAGE FROM USER: ${name}&body=${encodeURIComponent(msg)}`;
+        function sendMessage() {
+            const name = document.getElementById('userName').value;
+            const msg = document.getElementById('userMsg').value;
+            window.location.href = `mailto:momnsuper2010@gmail.com?subject=MESSAGE FROM ${name}&body=${encodeURIComponent(msg)}`;
         }
 
         function openModal(id) {
@@ -319,6 +384,10 @@
         window.onclick = function(e) {
             if (e.target.classList.contains('modal')) closeModal(e.target.id);
         }
+
+        // تشغيل الوظائف عند التحميل
+        renderGoals();
+        renderSuggestions();
     </script>
 </body>
 </html>
