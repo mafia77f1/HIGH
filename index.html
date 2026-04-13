@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>HIGH | System Core</title>
     <style>
         :root {
@@ -14,12 +14,16 @@
             --text: #ffffff;
         }
 
-        body {
+        /* منع الحركة لليمين واليسار نهائياً */
+        html, body {
             margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
             background: var(--bg);
             color: var(--text);
             font-family: 'Cairo', sans-serif;
-            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         header {
@@ -30,23 +34,22 @@
         }
 
         .high-logo {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 900;
             color: #fff;
             text-transform: uppercase;
-            letter-spacing: 8px;
-            text-shadow: 0 0 10px var(--p-glow), 0 0 20px var(--p-glow), 0 0 40px var(--p-dark);
-            position: relative;
-            display: inline-block;
+            letter-spacing: 5px;
+            text-shadow: 0 0 10px var(--p-glow), 0 0 20px var(--p-glow);
         }
 
-        .container { padding: 40px 5%; }
-        .section-title { color: var(--y-neon); text-align: center; margin-bottom: 40px; }
+        .container { padding: 20px 5%; }
+        .section-title { color: var(--y-neon); text-align: center; margin-bottom: 30px; }
 
         .grid {
             display: flex;
-            justify-content: center;
-            gap: 25px;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
         }
 
         .card {
@@ -54,134 +57,77 @@
             border: 2px solid var(--y-neon);
             border-radius: 12px;
             padding: 20px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 240, 31, 0.1);
+            width: 90%;
             max-width: 350px;
-            width: 100%;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 240, 31, 0.1);
+            cursor: pointer;
         }
 
-        .card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 0 30px rgba(255, 240, 31, 0.3);
-        }
-
-        .card h3 { color: var(--y-neon); margin-top: 0; font-size: 1.6rem; }
-
-        /* Modal Animatons */
+        /* النوافذ المنبثقة - متوافقة مع الجوال */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 1000;
+            background: rgba(0,0,0,0.98);
+            z-index: 2000;
             overflow-y: auto;
-            backdrop-filter: blur(10px);
             opacity: 0;
             transition: opacity 0.4s ease;
         }
 
-        .modal.show {
-            display: block;
-            opacity: 1;
-        }
+        .modal.show { display: block; opacity: 1; }
 
         .modal-content {
             background: #0f001a;
-            margin: 5% auto;
-            width: 90%;
-            max-width: 700px;
+            margin: 10% auto;
+            width: 85%;
+            max-width: 500px;
             border: 2px solid var(--p-glow);
             border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 0 50px var(--p-dark);
-            position: relative;
-            transform: translateY(-50px);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 20px;
+            transform: scale(0.8);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .modal.show .modal-content {
-            transform: translateY(0);
-        }
+        .modal.show .modal-content { transform: scale(1); }
 
-        .close-btn {
-            position: absolute;
-            top: 20px; left: 20px;
-            font-size: 2rem;
-            color: var(--p-glow);
-            cursor: pointer;
-        }
+        .close-btn { color: var(--p-glow); font-size: 2rem; cursor: pointer; float: left; }
 
-        .news-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .news-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
+        /* منطقة الأخبار القابلة للتعديل بسهولة */
+        .news-container {
+            margin-top: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(255,255,255,0.03);
             border-radius: 8px;
-            border-right: 4px solid var(--n-blue);
         }
 
-        .version-badge {
-            background: var(--p-glow);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            display: inline-block;
-            margin: 10px 0;
+        .news-item {
+            border-right: 3px solid var(--n-blue);
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
         }
 
         .dl-btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            padding: 15px;
-            margin-top: 20px;
-            background: transparent;
-            border: 2px solid var(--n-blue);
-            color: var(--n-blue);
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .dl-btn:hover {
-            background: var(--n-blue);
-            color: #000;
-            box-shadow: 0 0 20px var(--n-blue);
+            display: block; width: 100%; text-align: center; padding: 15px 0;
+            margin-top: 15px; background: transparent; border: 2px solid var(--n-blue);
+            color: var(--n-blue); text-decoration: none; font-weight: bold;
+            border-radius: 5px; cursor: pointer;
         }
 
         .partner-btn {
-            background: var(--p-glow);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: 0.3s;
-            box-shadow: 0 0 15px var(--p-glow);
+            background: var(--p-glow); color: white; border: none;
+            padding: 12px 25px; border-radius: 8px; cursor: pointer;
+            margin-top: 15px; box-shadow: 0 0 15px var(--p-glow);
         }
 
-        .partner-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px var(--p-glow);
-        }
-
-        .stats-area { background: #050505; padding: 40px 5%; margin-top: 50px; text-align: center; }
+        .stats-area { background: #050505; padding: 40px 5%; text-align: center; }
         
-        /* القسم الثالث: الدعم */
-        .support-section { padding: 40px 5%; text-align: center; }
-
         footer { padding: 40px; text-align: center; border-top: 1px solid #1a1a1a; }
-        .social a { color: var(--p-glow); margin: 0 15px; text-decoration: none; font-size: 1.2rem; }
+        .social a { color: var(--p-glow); margin: 0 10px; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -196,28 +142,25 @@
         <div class="grid">
             <div class="card" onclick="openModal('setvoidModal')">
                 <h3>SETVOID</h3>
-                <p>نظام تطوير الكيان البشري مستوحى من ميكانيكيات الـ System. اضغط للتفاصيل...</p>
-                <p style="color: var(--p-glow); font-size: 0.9rem;">عدد التحميلات: 0</p>
-                <div style="color: var(--n-blue); font-weight: bold;">[ اضغط لفتح الواجهة ]</div>
+                <p>نظام تطوير الكيان البشري مستوحى من ميكانيكيات الـ System.</p>
+                <p style="color: var(--p-glow); font-weight: bold;">عدد المطالب بها: <span id="demandCount">0</span></p>
+                <div style="color: var(--n-blue); font-weight: bold;">[ اضغط للتفاصيل ]</div>
             </div>
         </div>
     </div>
 
-    <section class="support-section">
-        <h2 class="section-title">مركز الدعم</h2>
-        <div class="card" style="margin: auto; border-color: var(--n-blue);">
-            <h3>دعم المشاريع</h3>
-            <p>يمكنك دعم أي تطبيق حابّه عن طريق تحويل الأموال للمساعدة في التطوير المستمر.</p>
-            <button class="dl-btn" style="border-color: var(--p-glow); color: var(--p-glow);" onclick="alert('سيتم إضافة وسائل الدفع قريباً')">دعم الآن</button>
+    <section class="container" style="text-align: center;">
+        <h2 class="section-title">دعم المشاريع</h2>
+        <div class="card" style="margin: auto; border-color: var(--n-blue);" onclick="openModal('supportModal')">
+            <h3>قائمة المشاريع المدعومة</h3>
+            <p>اضغط لاستعراض المشاريع التي يمكنك دعمها حالياً.</p>
         </div>
     </section>
 
     <section class="stats-area">
-        <h2 class="section-title">شركاء النجاح والإحصائيات</h2>
-        <div class="card" style="border-color: var(--p-glow); max-width: 400px; margin: auto;">
-            <h3 style="color: var(--p-glow);">النتائج المحققة</h3>
-            <p>معدل نمو الكيان: +85%</p>
-            <p>المستخدمين الذين تجاوزوا الرتبة E: 5,400</p>
+        <h2 class="section-title">الشركاء والإحصائيات</h2>
+        <div class="card" style="border-color: var(--p-glow); margin: auto;">
+            <h3 style="color: var(--p-glow);">التقديم للشراكة</h3>
             <button class="partner-btn" onclick="openModal('partnerModal')">تقديم اتفاق شراكة</button>
         </div>
     </section>
@@ -225,58 +168,82 @@
     <div id="setvoidModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('setvoidModal')">&times;</span>
-            <h2 style="color: var(--p-glow); text-shadow: 0 0 10px var(--p-glow);">معلومات النظام: SETVOID</h2>
-            <div class="version-badge">إصدار V1.0.4 - "اليقظة"</div>
-            <p style="color: #ccc;">تاريخ التحديث الأخير: 13 أبريل 2026</p>
-            <hr style="border: 0.5px solid rgba(255,255,255,0.1);">
-            <h3>آخر الأخبار والتحسينات</h3>
-            <div class="news-grid">
-                <div class="news-card"><h4>تحديث المهام</h4><p>إضافة مهام يومية جديدة لرفع مستوى الروح.</p></div>
-                <div class="news-card"><h4>إصلاح الثغرات</h4><p>تحسين استقرار النظام في "مناطق الجزاء".</p></div>
+            <h2 style="color: var(--p-glow);">نظام SETVOID</h2>
+            <p style="font-size: 0.8rem; color: #888;">إصدار V1.0.4 - "اليقظة"</p>
+            
+            <h4 style="color: var(--y-neon);">آخر الأخبار:</h4>
+            <div class="news-container" id="setvoidNews">
+                <div class="news-item">تم إضافة نظام الرتب الجديد بنجاح.</div>
+                <div class="news-item">تحسين استهلاك البطارية أثناء تشغيل النظام.</div>
+                <div class="news-item">فتح باب الطلب المسبق للنسخة التجريبية.</div>
             </div>
-            <a href="#" class="dl-btn">تحميل التحديث الآن (Neon Link)</a>
+
+            <button class="dl-btn" onclick="handlePreOrder()">الطلب المسبق الآن</button>
+        </div>
+    </div>
+
+    <div id="supportModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('supportModal')">&times;</span>
+            <h2 style="color: var(--n-blue);">المشاريع المتاحة</h2>
+            <div class="card" style="width: 100%; margin: 10px 0; border-color: var(--p-glow);">
+                <h3>SETVOID</h3>
+                <p>الحالة: متاح للدعم</p>
+            </div>
+            <p style="font-size: 0.8rem;">سيتم إضافة المزيد من المشاريع قريباً...</p>
         </div>
     </div>
 
     <div id="partnerModal" class="modal">
-        <div class="modal-content" style="max-width: 500px;">
+        <div class="modal-content">
             <span class="close-btn" onclick="closeModal('partnerModal')">&times;</span>
-            <h2 style="color: var(--p-glow);">شروط اتفاقية الشراكة</h2>
-            <div style="text-align: right; color: #ccc; line-height: 1.6;">
-                <p>1. الالتزام بهوية النظام البصرية.</p>
-                <p>2. توفير دعم فني متبادل بين الطرفين.</p>
-                <p>3. الشفافية التامة في عرض النتائج والإحصائيات.</p>
-                <p>4. الحفاظ على سرية بيانات مستخدمي HIGH.</p>
+            <h2 style="color: var(--p-glow);">شروط الشراكة</h2>
+            <div style="text-align: right; font-size: 0.9rem; line-height: 1.8;">
+                <p>- الحفاظ على جودة الأنظمة البرمجية.</p>
+                <p>- سرية البيانات المتبادلة.</p>
+                <p>- الالتزام بشروط الاستخدام الخاصة بـ HIGH.</p>
             </div>
-            <button class="dl-btn" onclick="window.location.href='mailto:momnsuper2010@gmail.com?subject=طلب تقديم شراكة جديدة'">تقديم الطلب عبر البريد</button>
+            <button class="dl-btn" style="border-color: var(--p-glow); color: var(--p-glow);" onclick="window.location.href='mailto:momnsuper2010@gmail.com?subject=طلب شراكة'">تقديم الطلب</button>
         </div>
     </div>
 
     <footer>
         <div class="social">
-            <a href="#">DISCORD</a> | <a href="#">X-PLATFORM</a> | <a href="#">INSTAGRAM</a>
+            <a href="#">DISCORD</a> | <a href="#">INSTAGRAM</a>
         </div>
-        <p style="margin-top:20px; opacity:0.3;">© 2026 HIGH SYSTEM. ALL RIGHTS RESERVED.</p>
+        <p style="margin-top:20px; opacity:0.3;">© 2026 HIGH SYSTEM.</p>
     </footer>
 
     <script>
+        // نظام عد الطلبات
+        let count = 0;
+        function handlePreOrder() {
+            count++;
+            document.getElementById('demandCount').innerText = count;
+            
+            const subject = "طلب مسبق لتطبيق SETVOID";
+            const body = "أرغب في الطلب المسبق، وإليك بياناتي:\n\n- الاسم:\n- العمر:\n- اليوم:\n- اسم جهازي:\n- السبب:";
+            window.location.href = `mailto:momnsuper2010@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        // التحكم في النوافذ
         function openModal(id) {
             const modal = document.getElementById(id);
             modal.style.display = 'block';
             setTimeout(() => { modal.classList.add('show'); }, 10);
             document.body.style.overflow = 'hidden';
         }
+
         function closeModal(id) {
             const modal = document.getElementById(id);
             modal.classList.remove('show');
             setTimeout(() => { modal.style.display = 'none'; }, 400);
             document.body.style.overflow = 'auto';
         }
+
         window.onclick = function(event) {
-            if (event.target.className === 'modal show') {
-                event.target.classList.remove('show');
-                setTimeout(() => { event.target.style.display = 'none'; }, 400);
-                document.body.style.overflow = 'auto';
+            if (event.target.classList.contains('modal')) {
+                closeModal(event.target.id);
             }
         }
     </script>
