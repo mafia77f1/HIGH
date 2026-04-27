@@ -16,7 +16,53 @@
             --text: #ffffff;
             --danger: #ff003c;
             --pure-white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.05);
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        /* شاشة التحميل - خط الدخول */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease;
+        }
+
+        .loader-text {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--n-blue);
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px var(--n-blue);
+        }
+
+        .loader-bar {
+            width: 250px;
+            height: 2px;
+            background: #111;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loader-progress {
+            position: absolute;
+            height: 100%;
+            width: 0%;
+            background: var(--n-blue);
+            box-shadow: 0 0 15px var(--n-blue);
+            animation: load 2.5s forwards cubic-bezier(0.42, 0, 0.58, 1);
+        }
+
+        @keyframes load {
+            0% { width: 0%; }
+            30% { width: 45%; }
+            70% { width: 75%; }
+            100% { width: 100%; }
         }
 
         html, body {
@@ -33,37 +79,26 @@
         header {
             padding: 80px 0;
             text-align: center;
-            border-bottom: 2px solid var(--pure-white);
-            background: radial-gradient(circle at center, #1a002a 0%, #000 100%);
-            box-shadow: 0 0 50px rgba(188, 19, 254, 0.2);
-            position: relative;
-        }
-
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--p-glow), var(--n-blue), transparent);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: radial-gradient(circle at center, #11001a 0%, #000 100%);
+            box-shadow: 0 0 50px rgba(188, 19, 254, 0.15);
         }
 
         .high-logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3rem, 10vw, 6rem);
+            font-size: clamp(3rem, 10vw, 5rem);
             font-weight: 900;
             color: var(--pure-white);
             text-transform: uppercase;
-            letter-spacing: 20px;
+            letter-spacing: 15px;
             text-shadow: 0 0 20px var(--pure-white), 0 0 40px var(--p-glow);
             margin-bottom: 10px;
-            animation: pulse 3s infinite;
+            animation: pulseLogo 3s infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
+        @keyframes pulseLogo {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(0.98); }
         }
 
         .container { padding: 40px 5%; }
@@ -71,15 +106,14 @@
             color: var(--y-neon); 
             text-align: center; 
             margin-bottom: 35px; 
-            text-shadow: 0 0 15px rgba(255, 240, 31, 0.6); 
+            text-shadow: 0 0 15px rgba(255, 240, 31, 0.4); 
             font-weight: 900;
-            font-size: 2rem;
             letter-spacing: 2px;
         }
 
         .story-section {
-            background: rgba(20, 20, 20, 0.8);
-            border-right: 5px solid var(--p-glow);
+            background: var(--glass);
+            border-right: 4px solid var(--p-glow);
             padding: 35px;
             margin: 20px auto;
             max-width: 950px;
@@ -87,63 +121,68 @@
             line-height: 2;
             position: relative;
             backdrop-filter: blur(10px);
-            box-shadow: -10px 0 30px rgba(188, 19, 254, 0.1);
+            box-shadow: -10px 0 30px rgba(188, 19, 254, 0.05);
+        }
+
+        .story-section::before {
+            content: 'TOP SECRET';
+            position: absolute;
+            top: 10px; left: 20px;
+            font-size: 0.7rem;
+            color: var(--danger);
+            letter-spacing: 3px;
+            font-family: 'Orbitron';
         }
 
         .discord-section {
             background: linear-gradient(135deg, #050505 0%, #111 100%);
-            border: 2px solid var(--n-blue);
+            border: 1px solid var(--n-blue);
             border-radius: 30px;
             padding: 50px;
             text-align: center;
             margin: 40px 0;
-            box-shadow: 0 0 50px rgba(0, 212, 255, 0.1);
-            transition: 0.5s;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.1);
         }
-
-        .discord-section:hover { box-shadow: 0 0 60px rgba(0, 212, 255, 0.3); }
 
         .discord-btn {
             display: inline-block;
             background: #5865F2;
             color: white;
-            padding: 18px 50px;
-            border-radius: 15px;
+            padding: 18px 45px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: 900;
-            margin-top: 25px;
-            transition: 0.3s;
-            text-transform: uppercase;
-            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+            margin-top: 20px;
+            transition: 0.4s;
+            box-shadow: 0 5px 20px rgba(88, 101, 242, 0.3);
+            font-family: 'Orbitron';
         }
 
         .discord-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 30px #5865F2; }
 
         .goal-item {
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: #080808;
+            border: 1px solid #1a1a1a;
             padding: 20px;
             border-radius: 18px;
             margin-bottom: 25px;
             transition: 0.3s;
         }
-        
-        .goal-item:hover { background: rgba(255,255,255,0.08); }
+
+        .goal-item:hover { border-color: var(--n-blue); }
 
         .progress-track {
             width: 100%;
             background: #111;
-            height: 12px;
-            border-radius: 20px;
+            height: 8px;
+            border-radius: 10px;
             margin: 15px 0;
             overflow: hidden;
-            border: 1px solid #222;
         }
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--n-blue), var(--p-glow));
             box-shadow: 0 0 15px var(--n-blue);
-            transition: 1s ease-in-out;
         }
 
         .grid {
@@ -155,24 +194,25 @@
 
         .card {
             background: linear-gradient(145deg, #0f0f0f, #050505);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 25px;
-            padding: 30px;
+            padding: 35px;
             width: 90%;
             max-width: 400px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             cursor: pointer;
             position: relative;
+            overflow: hidden;
         }
 
         .card:hover {
-            transform: scale(1.05);
+            transform: translateY(-15px);
             border-color: var(--p-glow);
-            box-shadow: 0 0 40px rgba(188, 19, 254, 0.3);
+            box-shadow: 0 0 40px rgba(188, 19, 254, 0.2);
         }
 
-        .card h3 { color: var(--y-neon); margin: 0 0 15px 0; font-size: 1.8rem; font-family: 'Orbitron'; }
+        .card h3 { color: var(--y-neon); margin-top: 0; font-size: 1.8rem; font-family: 'Orbitron'; }
 
         .suggest-grid {
             display: grid;
@@ -185,89 +225,112 @@
             background: #080808;
             padding: 25px;
             border-radius: 20px;
-            border-right: 4px solid var(--p-glow);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            animation: fadeIn 0.5s ease;
+            border-top: 2px solid var(--p-glow);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: slideIn 0.5s ease;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.92);
+            background: rgba(0,0,0,0.95);
             z-index: 2000;
             backdrop-filter: blur(15px);
         }
 
+        .modal.show { display: flex; justify-content: center; align-items: center; }
+
         .modal-content {
             background: #050505;
-            margin: 5% auto;
             width: 90%;
             max-width: 500px;
             border: 1px solid var(--p-glow);
             border-radius: 30px;
             padding: 40px;
             position: relative;
-            box-shadow: 0 0 100px rgba(188, 19, 254, 0.2);
         }
 
-        .close-btn { color: var(--pure-white); font-size: 2.5rem; cursor: pointer; position: absolute; left: 25px; top: 20px; }
+        .close-btn { color: var(--pure-white); font-size: 2.5rem; cursor: pointer; position: absolute; left: 25px; top: 15px; }
+
+        .warning-box {
+            background: rgba(255, 0, 60, 0.05);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
 
         .dl-btn {
             display: block; width: 100%; text-align: center; padding: 20px 0;
-            margin-top: 25px; background: transparent; border: 2px solid var(--n-blue);
+            margin-top: 25px; background: transparent; border: 1px solid var(--n-blue);
             color: var(--n-blue); text-decoration: none; font-weight: 900;
-            border-radius: 15px; cursor: pointer; transition: 0.3s; font-family: 'Orbitron';
+            border-radius: 15px; cursor: pointer; transition: 0.3s;
+            font-family: 'Orbitron';
         }
 
         .dl-btn:hover { background: var(--n-blue); color: #000; box-shadow: 0 0 30px var(--n-blue); }
 
         input, textarea {
-            width: 100%; background: #0f0f0f; border: 1px solid #333;
-            padding: 15px; margin: 15px 0; color: white; border-radius: 12px; font-family: 'Cairo';
+            width: 100%; background: #0a0a0a; border: 1px solid #222;
+            padding: 15px; margin: 15px 0; color: white; border-radius: 12px; box-sizing: border-box;
+            font-family: 'Cairo';
         }
 
-        input:focus, textarea:focus { border-color: var(--p-glow); outline: none; box-shadow: 0 0 10px var(--p-glow); }
+        input:focus { border-color: var(--p-glow); outline: none; }
 
-        footer { padding: 60px; text-align: center; background: #020202; }
+        footer { padding: 60px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+        .social a { color: var(--pure-white); margin: 0 15px; text-decoration: none; font-weight: bold; opacity: 0.6; transition: 0.3s; }
+        .social a:hover { opacity: 1; color: var(--n-blue); }
     </style>
 </head>
 <body>
 
+    <div id="loader">
+        <div class="loader-text">SYSTEM ACCESSING...</div>
+        <div class="loader-bar"><div class="loader-progress"></div></div>
+    </div>
+
     <header>
         <div class="high-logo">HIGH</div>
-        <p style="color: var(--n-blue); font-weight: bold; letter-spacing: 3px;">SYSTEM CORE | V1.0.5</p>
+        <p style="color: var(--n-blue); font-weight: bold; letter-spacing: 4px; font-family: 'Orbitron'; font-size: 0.8rem;">EVOLUTIONARY SYSTEM CORE</p>
     </header>
 
     <div class="container">
-        <h2 class="section-title">بروتوكول النشأة</h2>
+        <h2 class="section-title">بروتوكول النشأة: ظلال WAVER</h2>
         <div class="story-section">
-            <p>وُلدت <strong>HIGH</strong> لتكون الكيان الحاكم لمشروع <strong>SETVOID</strong>. نحن لا نبني تطبيقات، نحن نبني أنظمة تعيد تعريف قدراتك، حيث يتحول المستخدم إلى "صياد مستيقظ" داخل شبكتنا التقنية.</p>
+            <p style="color: var(--p-glow); font-weight: bold; margin-bottom: 10px;">[ الملف السري 00-X ]</p>
+            <p>وُلدت <strong>HIGH</strong> لتكون الكيان الحاكم لمشروع <strong>SETVOID</strong>. نحن لا نبني تطبيقات، نحن نبني أنظمة تعيد تعريف قدراتك، حيث يتحول المستخدم من مجرد "بشري عادي" إلى "صياد مستيقظ" داخل شبكتنا التقنية.</p>
         </div>
     </div>
 
     <div class="container">
         <div class="discord-section">
-            <h2 style="font-family: 'Orbitron';">HIGH DISCORD</h2>
-            <p>انضم إلى النخبة، نناقش آخر التحديثات ونكشف التسريبات الحصرية.</p>
-            <a href="https://discord.gg/YOUR_LINK_HERE" class="discord-btn">JOIN SERVER</a>
+            <h2 style="font-family: 'Orbitron'; font-size: 2rem;">HIGH SERVER</h2>
+            <p style="color: #888; margin: 15px 0;">انضم إلى القلب النابض للنظام. هنا حيث تلتقي النخبة وتُكشف الأسرار.</p>
+            <a href="https://discord.gg/YOUR_LINK_HERE" class="discord-btn">JOIN DISCORD</a>
         </div>
     </div>
 
     <div class="container">
-        <h2 class="section-title">أهداف النظام</h2>
+        <h2 class="section-title">أهداف المؤسسة</h2>
         <div id="goals-container"></div>
     </div>
 
     <div class="container">
-        <h2 class="section-title">الأعمال النشطة</h2>
+        <h2 class="section-title">الأعمال والتطبيقات</h2>
         <div class="grid">
             <div class="card" onclick="openModal('setvoidModal')">
                 <h3>SETVOID</h3>
                 <p>نظام تطوير الكيان البشري المتكامل.</p>
-                <p style="color: var(--p-glow); font-weight: 900;">الطلبات المسبقة: <span id="demandCount">0</span></p>
+                <p style="color: var(--p-glow); font-weight: bold; margin-top: 15px;">الطلبات: <span id="demandCount">0</span></p>
             </div>
         </div>
     </div>
@@ -277,7 +340,7 @@
         <div class="grid">
             <div class="card" style="border-color: var(--p-glow);" onclick="openModal('contactModal')">
                 <h3>إرسال اقتراح حقيقي</h3>
-                <p>اقتراحاتك تظهر فوراً في النظام أدناه.</p>
+                <p>اقتراحك سيظهر فوراً في سجل النظام أدناه بعد الإرسال.</p>
             </div>
         </div>
     </section>
@@ -287,129 +350,161 @@
         <div class="suggest-grid" id="suggestions-box"></div>
     </section>
 
-    <section class="stats-area container">
-        <h2 class="section-title">اتفاقيات الشراكة</h2>
+    <section class="stats-area">
+        <h2 class="section-title">برنامج الشراكة</h2>
         <div class="card" style="border-color: var(--danger); margin: auto;" onclick="openModal('partnerModal')">
-            <h3>تقديم طلب شراكة</h3>
-            <p style="color: var(--danger); font-weight: bold;">طلبات النشطة: <span id="partnerCount">0</span></p>
+            <h3>تقديم اتفاقية شراكة</h3>
+            <p style="color: var(--danger); font-weight: bold;">الطلبات النشطة: <span id="partnerCount">0</span></p>
         </div>
     </section>
 
     <div id="contactModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
-            <h2 style="color: var(--n-blue);">نظام الاقتراحات</h2>
-            <input type="text" id="senderName" placeholder="اسم الصياد">
-            <textarea id="senderMsg" rows="4" placeholder="اكتب اقتراحك التقني..."></textarea>
-            <button class="dl-btn" onclick="saveSuggestion()">تثبيت في النظام</button>
+            <h2 style="color: var(--n-blue); font-family: 'Orbitron';">SUGGESTION</h2>
+            <input type="text" id="senderName" placeholder="اسمك المستعار">
+            <textarea id="senderMsg" rows="4" placeholder="اكتب اقتراحك هنا..."></textarea>
+            <button class="dl-btn" onclick="addNewSuggestion()">تثبيت في النظام</button>
         </div>
     </div>
 
     <div id="setvoidModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('setvoidModal')">&times;</span>
-            <h2 style="color: var(--p-glow);">SETVOID</h2>
-            <button class="dl-btn" onclick="handlePreOrder()">تأكيد الطلب المسبق</button>
+            <h2 style="color: var(--p-glow); font-family: 'Orbitron';">SETVOID CORE</h2>
+            <div class="news-container">
+                <div class="news-item">تفعيل بروتوكول "الطلب المسبق".</div>
+                <div class="news-item">تحسين محرك البيانات Stats V2.</div>
+            </div>
+            <button class="dl-btn" onclick="handlePreOrder()">الطلب المسبق الآن</button>
         </div>
     </div>
 
     <div id="partnerModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('partnerModal')">&times;</span>
-            <h2 style="color: var(--danger);">طلب شراكة</h2>
+            <h2 style="color: var(--danger); font-family: 'Orbitron';">PARTNERSHIP</h2>
             <input type="text" id="pAppName" placeholder="اسم المشروع">
-            <button class="dl-btn" style="border-color: var(--danger); color: var(--danger);" onclick="handlePartnerRequest()">إرسال الطلب</button>
+            <div class="warning-box">⚠️ تحذير: سيتم فحص الطلب من قبل بروتوكول الأمن.</div>
+            <button class="dl-btn" style="border-color: var(--danger); color: var(--danger);" onclick="handlePartnerRequest()">تقديم طلب رسمي</button>
         </div>
     </div>
 
     <footer>
         <div class="social">
-            <a href="#">DISCORD</a> | <a href="#">INSTAGRAM</a>
+            <a href="#">DISCORD</a> | <a href="#">INSTAGRAM</a> | <a href="#">X-PROJECT</a>
         </div>
-        <p style="margin-top:30px; opacity:0.3;">© 2026 HIGH SYSTEM. AUTHENTICATED BY WAVER.</p>
+        <p style="margin-top:30px; opacity:0.3; font-size: 0.7rem; font-family: 'Orbitron';">© 2026 HIGH SYSTEM. AUTHENTICATED BY WAVER.</p>
     </footer>
 
     <script>
-        // نظام حفظ البيانات (LocalStorage)
-        let storage = {
-            demands: parseInt(localStorage.getItem('h_demands')) || 0,
-            partners: parseInt(localStorage.getItem('h_partners')) || 0,
-            suggestions: JSON.parse(localStorage.getItem('h_suggests')) || [
-                { user: "WAVER", text: "تم تفعيل نظام الحفظ التلقائي للاقتراحات.", date: "النظام" }
-            ]
-        };
+        // إخفاء الشاشة بعد التحميل
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                }, 1000);
+            }, 2500);
+        });
+
+        // نظام تخزين الاقتراحات الحقيقي (محلياً)
+        let liveSuggestions = JSON.parse(localStorage.getItem('high_suggests')) || [
+            { user: "يوسف", text: "إضافة نظام مستويات للمستخدمين.", date: "2026/04/10", color: "var(--p-glow)" },
+            { user: "المطور X", text: "فتح API للربط مع السيستم.", date: "2026/04/13", color: "var(--n-blue)" }
+        ];
+
+        let dCount = localStorage.getItem('dCount') || 0;
+        let pCount = localStorage.getItem('pCount') || 0;
 
         function updateStats() {
-            document.getElementById('demandCount').innerText = storage.demands;
-            document.getElementById('partnerCount').innerText = storage.partners;
-            loadSuggestions();
+            document.getElementById('demandCount').innerText = dCount;
+            document.getElementById('partnerCount').innerText = pCount;
         }
 
         const highGoals = [
-            { title: "استقرار SETVOID", pct: 85 },
-            { title: "توسيع الشبكة", pct: 45 }
+            { title: "كمال سيستم SETVOID", pct: 85 },
+            { title: "بناء مجتمع HIGH", pct: 60 },
+            { title: "الربط التقني", pct: 30 }
         ];
 
         function loadGoals() {
             document.getElementById('goals-container').innerHTML = highGoals.map(g => `
                 <div class="goal-item">
-                    <div style="display:flex; justify-content:space-between"><strong>${g.title}</strong><span>${g.pct}%</span></div>
+                    <div style="display:flex; justify-content:space-between">
+                        <strong style="color:var(--n-blue)">${g.title}</strong>
+                        <span>${g.pct}%</span>
+                    </div>
                     <div class="progress-track"><div class="progress-fill" style="width:${g.pct}%"></div></div>
                 </div>
             `).join('');
         }
 
-        function saveSuggestion() {
-            const name = document.getElementById('senderName').value;
-            const msg = document.getElementById('senderMsg').value;
-            if(!name || !msg) return alert("اكمل البيانات!");
-
-            const newS = { user: name, text: msg, date: new Date().toLocaleDateString() };
-            storage.suggestions.unshift(newS);
-            localStorage.setItem('h_suggests', JSON.stringify(storage.suggestions));
-            
-            // إرسال إيميل أيضاً كنسخة احتياطية لك
-            window.location.href = `mailto:momnsuper2010@gmail.com?subject=New Suggestion&body=${msg}`;
-            
-            closeModal('contactModal');
-            updateStats();
-        }
-
         function loadSuggestions() {
-            document.getElementById('suggestions-box').innerHTML = storage.suggestions.map(s => `
+            const container = document.getElementById('suggestions-box');
+            container.innerHTML = liveSuggestions.map(s => `
                 <div class="suggest-card">
-                    <h4 style="color:var(--p-glow)">${s.user}</h4>
-                    <p>${s.text}</p>
-                    <small style="opacity:0.4">${s.date}</small>
+                    <h4 style="color:${s.color || 'var(--p-glow)'}; margin:0;">${s.user}</h4>
+                    <p style="font-size:0.9rem; margin:10px 0;">${s.text}</p>
+                    <div style="font-size:0.7rem; opacity:0.4;">${s.date}</div>
                 </div>
             `).join('');
         }
 
+        function addNewSuggestion() {
+            const n = document.getElementById('senderName').value;
+            const m = document.getElementById('senderMsg').value;
+            if(!n || !m) return alert("يرجى ملء البيانات!");
+
+            const newS = { user: n, text: m, date: new Date().toLocaleDateString(), color: "var(--n-blue)" };
+            liveSuggestions.unshift(newS);
+            localStorage.setItem('high_suggests', JSON.stringify(liveSuggestions));
+            
+            // إرسال الإيميل (وظيفتك الأصلية)
+            window.location.href = `mailto:momnsuper2010@gmail.com?subject=New Suggestion from ${n}&body=${encodeURIComponent(m)}`;
+            
+            loadSuggestions();
+            closeModal('contactModal');
+            document.getElementById('senderName').value = "";
+            document.getElementById('senderMsg').value = "";
+        }
+
         function handlePreOrder() {
-            storage.demands++;
-            localStorage.setItem('h_demands', storage.demands);
-            window.location.href = `mailto:momnsuper2010@gmail.com?subject=PRE-ORDER`;
+            dCount++;
+            localStorage.setItem('dCount', dCount);
             updateStats();
-            closeModal('setvoidModal');
+            window.location.href = `mailto:momnsuper2010@gmail.com?subject=SETVOID PRE-ORDER&body=أرغب في الانضمام...`;
         }
 
         function handlePartnerRequest() {
-            storage.partners++;
-            localStorage.setItem('h_partners', storage.partners);
-            window.location.href = `mailto:momnsuper2010@gmail.com?subject=PARTNER`;
+            pCount++;
+            localStorage.setItem('pCount', pCount);
             updateStats();
-            closeModal('partnerModal');
+            const app = document.getElementById('pAppName').value;
+            window.location.href = `mailto:momnsuper2010@gmail.com?subject=PARTNERSHIP&body=طلب شراكة لـ: ${app}`;
         }
 
         function openModal(id) {
-            document.getElementById(id).style.display = 'block';
+            const m = document.getElementById(id);
+            m.style.display = 'flex';
+            setTimeout(() => m.classList.add('show'), 10);
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
+            const m = document.getElementById(id);
+            m.classList.remove('show');
+            setTimeout(() => m.style.display = 'none', 300);
+            document.body.style.overflow = 'auto';
         }
 
-        window.onload = () => { loadGoals(); updateStats(); };
+        window.onclick = (e) => { if(e.target.classList.contains('modal')) closeModal(e.target.id); }
+
+        window.onload = () => {
+            loadGoals();
+            loadSuggestions();
+            updateStats();
+        }
     </script>
 </body>
 </html>
