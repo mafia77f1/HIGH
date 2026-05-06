@@ -92,6 +92,28 @@
             margin-bottom: 10px;
         }
 
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(0,0,0,0.8);
+            border-bottom: 1px solid var(--p-glow);
+        }
+
+        .nav-bar a {
+            color: var(--pure-white);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .nav-bar a:hover {
+            color: var(--n-blue);
+            text-shadow: 0 0 10px var(--n-blue);
+        }
+
         .container { padding: 40px 5%; }
         .section-title { color: var(--y-neon); text-align: center; margin-bottom: 35px; text-shadow: 0 0 10px rgba(255, 240, 31, 0.5); font-weight: 900; }
 
@@ -299,6 +321,12 @@
         <p style="position: absolute; bottom: 20%; font-family: 'Orbitron'; letter-spacing: 5px; color: var(--n-blue); font-size: 0.7rem;">INITIALIZING SYSTEM...</p>
     </div>
 
+    <nav class="nav-bar">
+        <a href="index.html">الرئيسية</a>
+        <a href="privacy.html">سياسة الخصوصية</a>
+        <a href="contact.html">اتصل بنا</a>
+    </nav>
+
     <header>
         <div class="high-logo">HIGH</div>
         <p style="color: var(--pure-white); opacity: 0.8; letter-spacing: 5px; font-weight: bold;">EVOLUTIONARY SYSTEM CORE</p>
@@ -448,7 +476,7 @@
 
     <footer>
         <div class="social">
-            <a href="#">DISCORD</a> | <a href="#">INSTAGRAM</a> | <a href="#">X-PROJECT</a>
+            <a href="index.html">الرئيسية</a> | <a href="privacy.html">سياسة الخصوصية</a> | <a href="contact.html">اتصل بنا</a>
         </div>
         <p style="margin-top:30px; opacity:0.4; font-size: 0.8rem;">© 2026 HIGH SYSTEM INTERFACE. AUTHENTICATED BY WAVER.</p>
     </footer>
